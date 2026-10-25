@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
   checks: write
-  pull-requests: write
+  actions: read
 
 jobs:
   admin:
@@ -20,10 +20,14 @@ jobs:
       - uses: astral-sh/setup-uv@v6
       - run: uv sync
       - run: uv run pytest --junitxml=test-results/junit.xml
-      - uses: EnricoMi/publish-unit-test-result-action@v2
+      - uses: dorny/test-reporter@v2
         if: always()
         with:
-          files: admin/test-results/junit.xml
+          name: Test Results
+          path: admin/test-results/junit.xml
+          reporter: java-junit
+          list-suites: all
+          list-tests: all
       - run: uv run shelf-admin validate
       - name: site/collection.json is up to date
         run: |
