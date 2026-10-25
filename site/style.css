@@ -154,4 +154,4 @@ h1 { margin: 4px 0; font: 700 40px/1.05 'Space Grotesk', sans-serif; letter-spac
 
 .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; font-size: 13px; color: var(--muted); }
 .bgg-badge { display: inline-flex; }
-.bgg-badge img { display: block; height: 48px; width: auto; }
+.bgg-badge img { display: block; height: 64px; width: auto; }

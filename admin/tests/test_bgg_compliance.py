@@ -9,7 +9,7 @@ from shelf_admin.model import build, load_yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "site"
-LOGO = SITE / "img" / "powered-by-bgg.png"
+LOGO = SITE / "img" / "powered-by-bgg.webp"
 
 
 class LinkedImages(HTMLParser):
@@ -35,16 +35,16 @@ def test_powered_by_bgg_logo_linked_in_page():
     parser.feed((SITE / "index.html").read_text(encoding="utf-8"))
     logos = [
         (href, img) for href, img in parser.found
-        if re.match(r"https://(www\.)?boardgamegeek\.com/?$", href) and img.get("src") == "img/powered-by-bgg.png"
+        if re.match(r"https://(www\.)?boardgamegeek\.com/?$", href) and img.get("src") == "img/powered-by-bgg.webp"
     ]
-    assert logos, "index.html must show img/powered-by-bgg.png linked to https://boardgamegeek.com"
+    assert logos, "index.html must show img/powered-by-bgg.webp linked to https://boardgamegeek.com"
     assert "powered by bgg" in logos[0][1].get("alt", "").lower()
-    assert int(logos[0][1].get("height", 0)) >= 32, "logo must be large enough to be legible"
+    assert int(logos[0][1].get("height", 0)) >= 48, "logo must be large enough to be legible"
 
 
 def test_powered_by_bgg_logo_file_present():
     assert LOGO.exists() and LOGO.stat().st_size > 0, (
-        "Missing site/img/powered-by-bgg.png - download the official logo from "
+        "Missing site/img/powered-by-bgg.webp - download the official logo from "
         "https://boardgamegeek.com/using_the_xml_api"
     )
 
