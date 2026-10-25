@@ -48,9 +48,9 @@ def test_build_matches_viewer_schema(data):
 def test_build_uses_bgg_data(data):
     bgg = {"wingspan": {"bgg": 266192, "name": "Wingspan", "expansions": ["Wingspan: European Expansion", "Wingspan: Asia"]}}
     exp = build(data, bgg)["games"]["wingspan"]["expansions"]
-    assert exp["notOwned"] == ["Asia"]
+    assert exp["notOwned"] == ["Wingspan: Asia"]
 
 
 def test_expansion_matching_is_fuzzy():
-    split = split_expansions(["european expansion"], ["Wingspan: European Expansion", "Wingspan: Oceania Expansion"], "Wingspan")
-    assert split["notOwned"] == ["Oceania Expansion"]
+    split = split_expansions(["european expansion"], ["Wingspan: European Expansion", "Wingspan: Oceania Expansion"])
+    assert split["notOwned"] == ["Wingspan: Oceania Expansion"]

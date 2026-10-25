@@ -94,20 +94,9 @@ def norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
-def short_name(exp: str, base: str) -> str:
-    for sep in (": ", " – ", " - "):
-        if exp.lower().startswith(base.lower() + sep):
-            return exp[len(base) + len(sep):]
-    return exp
-
-
-def split_expansions(owned: list[str], available: list[str], base: str) -> dict:
+def split_expansions(owned: list[str], available: list[str]) -> dict:
     owned_norm = [norm(o) for o in owned]
-    not_owned = [
-        short_name(a, base)
-        for a in available
-        if not any(o and o in norm(a) for o in owned_norm)
-    ]
+    not_owned = [a for a in available if not any(o and o in norm(a) for o in owned_norm)]
     return {"owned": list(owned), "notOwned": not_owned}
 
 
@@ -146,7 +135,7 @@ def build(data: dict, bgg: dict) -> dict:
                 game[key] = g[key]
         if info.get("thumbnail"):
             game["thumbnail"] = info["thumbnail"]
-        exp = split_expansions(g.get("expansions") or [], info.get("expansions") or [], info.get("name") or g["name"])
+        exp = split_expansions(g.get("expansions") or [], info.get("expansions") or [])
         if exp["owned"] or exp["notOwned"]:
             game["expansions"] = exp
         games[gid] = game

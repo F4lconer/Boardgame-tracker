@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 from shelf_admin.bgg import BGG, BGGError, resolve
-from shelf_admin.model import build, load_bgg, load_yaml, short_name, split_expansions, validate
+from shelf_admin.model import build, load_bgg, load_yaml, split_expansions, validate
 
 ADMIN = Path(__file__).resolve().parents[2]
 ROOT = ADMIN.parent
@@ -89,12 +89,12 @@ def cmd_expansions(args):
         if not g or not info:
             print(f"{gid}: no BGG data (run `shelf-admin bgg`)")
             continue
-        split = split_expansions(g.get("expansions") or [], info["expansions"], info["name"])
+        split = split_expansions(g.get("expansions") or [], info["expansions"])
         print(f"{g['name']} — {len(split['owned'])} owned, {len(split['notOwned'])} not owned")
         for name in g.get("expansions") or []:
             print(f"  [x] {name}")
         for name in split["notOwned"]:
-            print(f"  [ ] {short_name(name, info['name'])}")
+            print(f"  [ ] {name}")
     return 0
 
 

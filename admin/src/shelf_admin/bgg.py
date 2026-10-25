@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 API = "https://boardgamegeek.com/xmlapi2"
+MIN_DELAY = 5.0
 
 
 class BGGError(RuntimeError):
@@ -14,12 +15,12 @@ class BGGError(RuntimeError):
 
 
 class BGG:
-    def __init__(self, token: str, cache_dir: Path, delay: float = 2.0):
+    def __init__(self, token: str, cache_dir: Path, delay: float = MIN_DELAY):
         if not token:
             raise BGGError("BGG_API_TOKEN is not set (env var or admin/.env). Register an app at boardgamegeek.com/applications.")
         self.token = token
         self.cache_dir = cache_dir
-        self.delay = delay
+        self.delay = max(delay, MIN_DELAY)
         cache_dir.mkdir(parents=True, exist_ok=True)
 
     def _get(self, endpoint: str, **params) -> ET.Element:

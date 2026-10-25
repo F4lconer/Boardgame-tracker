@@ -37,6 +37,7 @@ Connect the GitHub repo in Cloudflare Pages:
 Every push to `main` redeploys.
 
 ## Notes
+- BGG API rules: see `BGG_RULES.md`. The official "Powered by BGG" logo must be at `site/img/powered-by-bgg.png` (CI fails without it).
 - BGG API needs a registered app token: https://boardgamegeek.com/applications. Never commit `.env`.
 - Pin a wrong BGG match with `bgg: <id>` on the game in `collection.yaml`, then rerun `bgg`.
 - `admin/data/bgg.json` is generated but committed, so builds work without the token.
