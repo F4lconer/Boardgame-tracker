@@ -1,34 +1,77 @@
 # Source of truth for the collection. Edit this, then run: uv run shelf-admin build
+#
+# Storage types:
+#   kallax - one Kallax unit: rows, cols, cells, optional top
+#   wall   - Kallax units placed together: stacks side by side (left to right),
+#            each stack lists its units bottom to top; an upper unit sits on the one
+#            below, aligned left or right. Any unit can have a `top` with games on it.
+#   shelf  - plain bookcase: width (in cube widths), shelves (top to bottom)
 
 storages:
-  - id: living-kallax
-    name: Living room Kallax
-    type: kallax
-    rows: 4
-    cols: 4
-    cells:
-      - {at: [1, 1], kind: open, layout: standing, games: [wingspan, cascadia, azul]}
-      - {at: [1, 2], kind: open, layout: stacked, games: [gloomhaven, spirit-island, brass-birmingham]}
-      - {at: [1, 3], kind: doors, layout: standing, games: [catan, carcassonne, ticket-to-ride]}
-      - {at: [1, 4], kind: open, layout: standing, games: [terraforming-mars, ark-nova, root]}
-      - {at: [2, 1], kind: drawers, drawers: [[love-letter, the-mind, hanabi, skull], [sushi-go, coup, codenames-duet]]}
-      - {at: [2, 2], kind: open, layout: standing, games: [dune-imperium, lost-ruins-of-arnak, cartographers]}
-      - {at: [2, 3], kind: open, layout: stacked, games: [scythe, twilight-imperium]}
-      - {at: [3, 1], kind: doors, layout: standing, games: [dixit, mysterium, codenames]}
-      - {at: [3, 2], kind: open, layout: standing, games: [concordia, great-western-trail, orleans]}
-      - {at: [3, 3], kind: drawers, drawers: [[jaipur, lost-cities], [hive-pocket, patchwork]]}
-      - {at: [3, 4], kind: open, layout: standing, games: [pandemic, flash-point, sky-team]}
-      - {at: [4, 1], kind: open, layout: stacked, games: [twilight-struggle, war-of-the-ring]}
-      - {at: [4, 3], kind: open, layout: standing, games: [kingdomino, splendor, 7-wonders-duel, quacks]}
-      - {at: [4, 4], kind: doors, layout: standing, games: [exploding-kittens, bang]}
-  - id: hallway
-    name: Hallway bookcase
+  - id: bedroom-wall
+    name: Bedroom wall
+    type: wall
+    stacks:
+      - units:
+          - id: left
+            name: Left 5×5
+            rows: 5
+            cols: 5
+            top: {layout: stacked, games: [kemet]}
+            cells:
+              - {at: [1, 1], kind: open, layout: standing, games: [wingspan, cascadia, azul]}
+              - {at: [1, 2], kind: open, layout: stacked, games: [gloomhaven, spirit-island, brass-birmingham]}
+              - {at: [1, 3], kind: doors, layout: standing, games: [catan, carcassonne, ticket-to-ride]}
+              - {at: [1, 4], kind: open, layout: standing, games: [terraforming-mars, ark-nova, root]}
+              - {at: [1, 5], kind: open, layout: standing, games: [everdell, viticulture, agricola]}
+              - {at: [2, 1], kind: drawers, drawers: [[love-letter, the-mind, hanabi, skull], [sushi-go, coup, codenames-duet]]}
+              - {at: [2, 2], kind: open, layout: standing, games: [dune-imperium, lost-ruins-of-arnak, cartographers]}
+              - {at: [2, 3], kind: open, layout: stacked, games: [scythe, twilight-imperium]}
+              - {at: [2, 4], kind: open, layout: standing, games: [castles-of-burgundy, heat, clank]}
+              - {at: [3, 1], kind: doors, layout: standing, games: [dixit, mysterium, codenames]}
+              - {at: [3, 2], kind: open, layout: standing, games: [concordia, great-western-trail, orleans]}
+              - {at: [3, 3], kind: drawers, drawers: [[jaipur, lost-cities], [hive-pocket, patchwork]]}
+              - {at: [3, 4], kind: open, layout: standing, games: [pandemic, flash-point, sky-team]}
+              - {at: [4, 1], kind: open, layout: stacked, games: [twilight-struggle, war-of-the-ring]}
+              - {at: [4, 3], kind: open, layout: standing, games: [kingdomino, splendor, 7-wonders-duel, quacks]}
+              - {at: [4, 4], kind: doors, layout: standing, games: [exploding-kittens, bang]}
+              - {at: [5, 2], kind: drawers, drawers: [[the-crew], [just-one]]}
+          - id: left-top
+            name: Left top 2×4
+            rows: 2
+            cols: 4
+            align: left
+            top: {layout: stacked, games: [blood-rage, rising-sun]}
+            cells:
+              - {at: [1, 1], kind: open, layout: standing, games: [dominion, small-world]}
+              - {at: [2, 3], kind: open, layout: standing, games: [calico, earth]}
+      - units:
+          - id: right
+            name: Right 5×5
+            rows: 5
+            cols: 5
+            top: {layout: standing, games: [wavelength]}
+            cells:
+              - {at: [1, 1], kind: open, layout: stacked, games: [cosmic-encounter, blood-on-the-clocktower]}
+              - {at: [2, 2], kind: doors, layout: standing, games: [arkham-horror-lcg, eldritch-horror]}
+              - {at: [3, 5], kind: open, layout: standing, games: [galaxy-trucker, takenoko]}
+          - id: right-top
+            name: Right top 2×4
+            rows: 2
+            cols: 4
+            align: right
+            top: {layout: standing, games: [cthulhu-death-may-die, zombicide]}
+            cells:
+              - {at: [1, 4], kind: open, layout: stacked, games: [nemesis]}
+
+  - id: living-room
+    name: Living room bookcase
     type: shelf
     width: 3
     shelves:
-      - {layout: standing, games: [arkham-horror-lcg, mansions-of-madness, eldritch-horror, nemesis]}
+      - {layout: standing, games: [mansions-of-madness, isle-of-cats, tokaido, photosynthesis]}
       - {layout: stacked, games: [frosthaven, oathsworn]}
-      - {layout: standing, games: [galaxy-trucker, isle-of-cats, takenoko, tokaido, photosynthesis, santorini]}
+      - {layout: standing, games: [santorini, galaxy-trucker, the-crew, love-letter]}
 
 # id: {name, size: small|standard|large, bgg: <id to pin a match>, expansions: [owned expansion names]}
 games:
@@ -89,3 +132,23 @@ games:
   tokaido: {name: "Tokaido"}
   photosynthesis: {name: "Photosynthesis"}
   santorini: {name: "Santorini"}
+  everdell: {name: "Everdell"}
+  viticulture: {name: "Viticulture"}
+  agricola: {name: "Agricola"}
+  castles-of-burgundy: {name: "The Castles of Burgundy"}
+  heat: {name: "Heat: Pedal to the Metal"}
+  clank: {name: "Clank!"}
+  the-crew: {name: "The Crew", size: small}
+  just-one: {name: "Just One", size: small}
+  dominion: {name: "Dominion"}
+  small-world: {name: "Small World"}
+  calico: {name: "Calico"}
+  earth: {name: "Earth"}
+  cosmic-encounter: {name: "Cosmic Encounter"}
+  blood-on-the-clocktower: {name: "Blood on the Clocktower", size: large}
+  wavelength: {name: "Wavelength"}
+  kemet: {name: "Kemet: Blood and Sand", size: large}
+  blood-rage: {name: "Blood Rage", size: large}
+  rising-sun: {name: "Rising Sun", size: large}
+  cthulhu-death-may-die: {name: "Cthulhu: Death May Die", size: large}
+  zombicide: {name: "Zombicide", size: large}

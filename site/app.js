@@ -19,18 +19,20 @@ function indexPlaces() {
   places = [];
   const add = (id, key, where) => places.push({ id, key, where });
   const order = (layout, i) => `${ord(i + 1)} from ${layout === 'stacked' ? 'top' : 'left'}`;
-  for (const s of data.storages) {
-    if (s.type === 'kallax') {
-      for (const c of s.cells) {
-        const key = `${s.id}:${c.row}:${c.col}`;
-        const pos = `${s.name} · row ${c.row}, column ${c.col}`;
-        if (c.kind === 'drawers') c.drawers.forEach((d, di) => d.forEach(id => add(id, `${key}:${di}`, `${pos} · ${di ? 'bottom' : 'top'} drawer`)));
-        else if (c.kind === 'doors') (c.games || []).forEach((id, i) => add(id, key, `${pos} · behind doors, ${order(c.layout, i)}`));
-        else (c.games || []).forEach((id, i) => add(id, key, `${pos} · ${order(c.layout, i)}`));
-      }
-    } else {
-      s.shelves.forEach((sh, si) => sh.games.forEach((id, i) => add(id, `${s.id}:${si}`, `${s.name} · shelf ${si + 1} · ${order(sh.layout, i)}`)));
+  const unit = (u, prefix, label) => {
+    for (const c of u.cells) {
+      const key = `${prefix}:${c.row}:${c.col}`;
+      const pos = `${label} · row ${c.row}, column ${c.col}`;
+      if (c.kind === 'drawers') c.drawers.forEach((d, di) => d.forEach(id => add(id, `${key}:${di}`, `${pos} · ${di ? 'bottom' : 'top'} drawer`)));
+      else if (c.kind === 'doors') (c.games || []).forEach((id, i) => add(id, key, `${pos} · behind doors, ${order(c.layout, i)}`));
+      else (c.games || []).forEach((id, i) => add(id, key, `${pos} · ${order(c.layout, i)}`));
     }
+    if (u.top) u.top.games.forEach((id, i) => add(id, `${prefix}:top`, `${label} · on top, ${order(u.top.layout, i)}`));
+  };
+  for (const s of data.storages) {
+    if (s.type === 'kallax') unit(s, s.id, s.name);
+    else if (s.type === 'wall') s.stacks.forEach(st => st.units.forEach(u => unit(u, `${s.id}.${u.id}`, `${s.name} · ${u.name}`)));
+    else s.shelves.forEach((sh, si) => sh.games.forEach((id, i) => add(id, `${s.id}:${si}`, `${s.name} · shelf ${si + 1} · ${order(sh.layout, i)}`)));
   }
 }
 
@@ -44,15 +46,15 @@ function box(id, ctx) {
   return `<button type="button" class="box box--${g.size || 'standard'}${cls}" style="--c:${colorOf(id)}" data-game="${esc(id)}" title="${esc(g.name)}">${esc(g.name)}</button>`;
 }
 
-function cellHtml(s, c, ctx) {
+function cellHtml(prefix, c, ctx) {
   if (!c || c.kind === 'empty') return '<div class="cell cell--empty">empty</div>';
-  const key = `${s.id}:${c.row}:${c.col}`;
+  const key = `${prefix}:${c.row}:${c.col}`;
   const layout = c.layout || 'standing';
   const hit = ctx.hitKeys.has(key) ? ' has-hit' : '';
   if (c.kind === 'drawers') {
     const drawers = c.drawers.map((d, di) => {
       const hits = d.filter(id => ctx.hitKeys.has(`${key}:${di}`) && ctx.hitIds.has(id));
-      const label = hits.length ? hits.map(id => game(id).name).join(', ') : `${d.length} games`;
+      const label = hits.length ? hits.map(id => game(id).name).join(', ') : `${d.length} game${d.length === 1 ? "" : "s"}`;
       const cls = ctx.q ? (hits.length ? ' is-hit' : ' is-dim') : '';
       return `<div class="drawer${cls}" title="${esc(d.map(id => game(id).name).join(', '))}"><span class="pull"></span><span class="label">${esc(label)}</span></div>`;
     }).join('');
@@ -70,18 +72,45 @@ function cellHtml(s, c, ctx) {
   return `<div class="cell ${layout}${hit}">${boxes}</div>`;
 }
 
-function kallaxHtml(s, ctx) {
-  const byPos = new Map(s.cells.map(c => [`${c.row}:${c.col}`, c]));
+function frameHtml(u, prefix, ctx) {
+  const byPos = new Map(u.cells.map(c => [`${c.row}:${c.col}`, c]));
   const cells = [];
-  for (let r = 1; r <= s.rows; r++) for (let c = 1; c <= s.cols; c++) cells.push(cellHtml(s, byPos.get(`${r}:${c}`), ctx));
+  for (let r = 1; r <= u.rows; r++) for (let c = 1; c <= u.cols; c++) cells.push(cellHtml(prefix, byPos.get(`${r}:${c}`), ctx));
+  return `<div class="frame">${cells.join('')}</div>`;
+}
+
+function topHtml(u, prefix, ctx, [from, to]) {
+  if (!u.top || !u.top.games.length || to <= from) return '';
+  const hit = ctx.hitKeys.has(`${prefix}:top`) ? ' has-hit' : '';
+  return `<div class="top-surface ${u.top.layout || 'standing'}${hit}" style="--from:${from};--span:${to - from}">${u.top.games.map(id => box(id, ctx)).join('')}</div>`;
+}
+
+function kallaxHtml(s, ctx) {
   const cols = Array.from({ length: s.cols }, (_, i) => `<span>${i + 1}</span>`).join('');
   const rows = Array.from({ length: s.rows }, (_, i) => `<span>${i + 1}</span>`).join('');
+  const top = s.top && s.top.games.length ? ' has-top' : '';
   return `<section class="storage">
     <div class="storage-head"><h2>${esc(s.name)}</h2><span class="meta">Kallax ${s.rows} × ${s.cols}</span></div>
-    <div class="scroll"><div class="grid-wrap" style="--cols:${s.cols};--rows:${s.rows}">
+    <div class="scroll${top}"><div class="grid-wrap" style="--cols:${s.cols};--rows:${s.rows}">
       <div class="labels cols">${cols}</div><div class="labels rows">${rows}</div>
-      <div class="frame">${cells.join('')}</div>
+      <div class="unit">${topHtml(s, s.id, ctx, [0, s.cols])}${frameHtml(s, s.id, ctx)}</div>
     </div></div></section>`;
+}
+
+function wallHtml(s, ctx) {
+  const stacks = s.stacks.map(st => {
+    const units = st.units.map((u, i) => {
+      const above = st.units[i + 1];
+      const span = !above ? [0, u.cols] : above.align === 'right' ? [0, u.cols - above.cols] : [above.cols, u.cols];
+      const prefix = `${s.id}.${u.id}`;
+      return `<div class="unit unit--${u.align === 'right' ? 'right' : 'left'}" style="--cols:${u.cols}" title="${esc(u.name)}">${topHtml(u, prefix, ctx, span)}${frameHtml(u, prefix, ctx)}</div>`;
+    });
+    return `<div class="stack">${units.reverse().join('')}</div>`;
+  }).join('');
+  const count = s.stacks.reduce((n, st) => n + st.units.length, 0);
+  return `<section class="storage storage--wall">
+    <div class="storage-head"><h2>${esc(s.name)}</h2><span class="meta">Wall · ${count} Kallax units</span></div>
+    <div class="scroll"><div class="wall">${stacks}</div></div></section>`;
 }
 
 function shelfHtml(s, ctx) {
@@ -101,7 +130,8 @@ function shelfHtml(s, ctx) {
 function panelHtml(ctx) {
   const legend = `<div class="block"><div class="block-head">Cell types</div><div class="legend">
     <div><span class="sw sw-open"></span>Open cube</div><div><span class="sw sw-doors"></span>Doors</div>
-    <div><span class="sw sw-drawers"></span>Two drawers</div><div><span class="sw sw-shelf"></span>Plain shelf</div></div></div>`;
+    <div><span class="sw sw-drawers"></span>Two drawers</div><div><span class="sw sw-shelf"></span>Plain shelf</div>
+    <div><span class="sw sw-top"></span>On top of a unit</div></div></div>`;
   const head = '<div class="eyebrow">Where is it?</div>';
   if (!ctx.q) return `${head}<p>Type a game name or tap any box. Doors open and drawers light up when the game is inside.</p>${legend}`;
   if (!ctx.found.length) return `${head}<p>No game matches “${esc(state.query)}”.</p>${legend}`;
@@ -132,7 +162,7 @@ function render() {
     ctx.hitKeys.add(p.key);
     if (p.key.split(':').length === 4) ctx.hitKeys.add(p.key.split(':').slice(0, 3).join(':'));
   }
-  $('#storages').innerHTML = data.storages.map(s => s.type === 'kallax' ? kallaxHtml(s, ctx) : shelfHtml(s, ctx)).join('');
+  $('#storages').innerHTML = data.storages.map(s => s.type === 'kallax' ? kallaxHtml(s, ctx) : s.type === 'wall' ? wallHtml(s, ctx) : shelfHtml(s, ctx)).join('');
   $('#panel').innerHTML = panelHtml(ctx);
 }
 

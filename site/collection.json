@@ -2,190 +2,352 @@
   "version": 1,
   "storages": [
     {
-      "id": "living-kallax",
-      "name": "Living room Kallax",
-      "type": "kallax",
-      "rows": 4,
-      "cols": 4,
-      "cells": [
+      "id": "bedroom-wall",
+      "name": "Bedroom wall",
+      "type": "wall",
+      "stacks": [
         {
-          "row": 1,
-          "col": 1,
-          "kind": "open",
-          "layout": "standing",
-          "games": [
-            "wingspan",
-            "cascadia",
-            "azul"
+          "units": [
+            {
+              "id": "left",
+              "name": "Left 5×5",
+              "align": "left",
+              "rows": 5,
+              "cols": 5,
+              "cells": [
+                {
+                  "row": 1,
+                  "col": 1,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "wingspan",
+                    "cascadia",
+                    "azul"
+                  ]
+                },
+                {
+                  "row": 1,
+                  "col": 2,
+                  "kind": "open",
+                  "layout": "stacked",
+                  "games": [
+                    "gloomhaven",
+                    "spirit-island",
+                    "brass-birmingham"
+                  ]
+                },
+                {
+                  "row": 1,
+                  "col": 3,
+                  "kind": "doors",
+                  "layout": "standing",
+                  "games": [
+                    "catan",
+                    "carcassonne",
+                    "ticket-to-ride"
+                  ]
+                },
+                {
+                  "row": 1,
+                  "col": 4,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "terraforming-mars",
+                    "ark-nova",
+                    "root"
+                  ]
+                },
+                {
+                  "row": 1,
+                  "col": 5,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "everdell",
+                    "viticulture",
+                    "agricola"
+                  ]
+                },
+                {
+                  "row": 2,
+                  "col": 1,
+                  "kind": "drawers",
+                  "drawers": [
+                    [
+                      "love-letter",
+                      "the-mind",
+                      "hanabi",
+                      "skull"
+                    ],
+                    [
+                      "sushi-go",
+                      "coup",
+                      "codenames-duet"
+                    ]
+                  ]
+                },
+                {
+                  "row": 2,
+                  "col": 2,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "dune-imperium",
+                    "lost-ruins-of-arnak",
+                    "cartographers"
+                  ]
+                },
+                {
+                  "row": 2,
+                  "col": 3,
+                  "kind": "open",
+                  "layout": "stacked",
+                  "games": [
+                    "scythe",
+                    "twilight-imperium"
+                  ]
+                },
+                {
+                  "row": 2,
+                  "col": 4,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "castles-of-burgundy",
+                    "heat",
+                    "clank"
+                  ]
+                },
+                {
+                  "row": 3,
+                  "col": 1,
+                  "kind": "doors",
+                  "layout": "standing",
+                  "games": [
+                    "dixit",
+                    "mysterium",
+                    "codenames"
+                  ]
+                },
+                {
+                  "row": 3,
+                  "col": 2,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "concordia",
+                    "great-western-trail",
+                    "orleans"
+                  ]
+                },
+                {
+                  "row": 3,
+                  "col": 3,
+                  "kind": "drawers",
+                  "drawers": [
+                    [
+                      "jaipur",
+                      "lost-cities"
+                    ],
+                    [
+                      "hive-pocket",
+                      "patchwork"
+                    ]
+                  ]
+                },
+                {
+                  "row": 3,
+                  "col": 4,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "pandemic",
+                    "flash-point",
+                    "sky-team"
+                  ]
+                },
+                {
+                  "row": 4,
+                  "col": 1,
+                  "kind": "open",
+                  "layout": "stacked",
+                  "games": [
+                    "twilight-struggle",
+                    "war-of-the-ring"
+                  ]
+                },
+                {
+                  "row": 4,
+                  "col": 3,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "kingdomino",
+                    "splendor",
+                    "7-wonders-duel",
+                    "quacks"
+                  ]
+                },
+                {
+                  "row": 4,
+                  "col": 4,
+                  "kind": "doors",
+                  "layout": "standing",
+                  "games": [
+                    "exploding-kittens",
+                    "bang"
+                  ]
+                },
+                {
+                  "row": 5,
+                  "col": 2,
+                  "kind": "drawers",
+                  "drawers": [
+                    [
+                      "the-crew"
+                    ],
+                    [
+                      "just-one"
+                    ]
+                  ]
+                }
+              ],
+              "top": {
+                "layout": "stacked",
+                "games": [
+                  "kemet"
+                ]
+              }
+            },
+            {
+              "id": "left-top",
+              "name": "Left top 2×4",
+              "align": "left",
+              "rows": 2,
+              "cols": 4,
+              "cells": [
+                {
+                  "row": 1,
+                  "col": 1,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "dominion",
+                    "small-world"
+                  ]
+                },
+                {
+                  "row": 2,
+                  "col": 3,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "calico",
+                    "earth"
+                  ]
+                }
+              ],
+              "top": {
+                "layout": "stacked",
+                "games": [
+                  "blood-rage",
+                  "rising-sun"
+                ]
+              }
+            }
           ]
         },
         {
-          "row": 1,
-          "col": 2,
-          "kind": "open",
-          "layout": "stacked",
-          "games": [
-            "gloomhaven",
-            "spirit-island",
-            "brass-birmingham"
-          ]
-        },
-        {
-          "row": 1,
-          "col": 3,
-          "kind": "doors",
-          "layout": "standing",
-          "games": [
-            "catan",
-            "carcassonne",
-            "ticket-to-ride"
-          ]
-        },
-        {
-          "row": 1,
-          "col": 4,
-          "kind": "open",
-          "layout": "standing",
-          "games": [
-            "terraforming-mars",
-            "ark-nova",
-            "root"
-          ]
-        },
-        {
-          "row": 2,
-          "col": 1,
-          "kind": "drawers",
-          "drawers": [
-            [
-              "love-letter",
-              "the-mind",
-              "hanabi",
-              "skull"
-            ],
-            [
-              "sushi-go",
-              "coup",
-              "codenames-duet"
-            ]
-          ]
-        },
-        {
-          "row": 2,
-          "col": 2,
-          "kind": "open",
-          "layout": "standing",
-          "games": [
-            "dune-imperium",
-            "lost-ruins-of-arnak",
-            "cartographers"
-          ]
-        },
-        {
-          "row": 2,
-          "col": 3,
-          "kind": "open",
-          "layout": "stacked",
-          "games": [
-            "scythe",
-            "twilight-imperium"
-          ]
-        },
-        {
-          "row": 3,
-          "col": 1,
-          "kind": "doors",
-          "layout": "standing",
-          "games": [
-            "dixit",
-            "mysterium",
-            "codenames"
-          ]
-        },
-        {
-          "row": 3,
-          "col": 2,
-          "kind": "open",
-          "layout": "standing",
-          "games": [
-            "concordia",
-            "great-western-trail",
-            "orleans"
-          ]
-        },
-        {
-          "row": 3,
-          "col": 3,
-          "kind": "drawers",
-          "drawers": [
-            [
-              "jaipur",
-              "lost-cities"
-            ],
-            [
-              "hive-pocket",
-              "patchwork"
-            ]
-          ]
-        },
-        {
-          "row": 3,
-          "col": 4,
-          "kind": "open",
-          "layout": "standing",
-          "games": [
-            "pandemic",
-            "flash-point",
-            "sky-team"
-          ]
-        },
-        {
-          "row": 4,
-          "col": 1,
-          "kind": "open",
-          "layout": "stacked",
-          "games": [
-            "twilight-struggle",
-            "war-of-the-ring"
-          ]
-        },
-        {
-          "row": 4,
-          "col": 3,
-          "kind": "open",
-          "layout": "standing",
-          "games": [
-            "kingdomino",
-            "splendor",
-            "7-wonders-duel",
-            "quacks"
-          ]
-        },
-        {
-          "row": 4,
-          "col": 4,
-          "kind": "doors",
-          "layout": "standing",
-          "games": [
-            "exploding-kittens",
-            "bang"
+          "units": [
+            {
+              "id": "right",
+              "name": "Right 5×5",
+              "align": "left",
+              "rows": 5,
+              "cols": 5,
+              "cells": [
+                {
+                  "row": 1,
+                  "col": 1,
+                  "kind": "open",
+                  "layout": "stacked",
+                  "games": [
+                    "cosmic-encounter",
+                    "blood-on-the-clocktower"
+                  ]
+                },
+                {
+                  "row": 2,
+                  "col": 2,
+                  "kind": "doors",
+                  "layout": "standing",
+                  "games": [
+                    "arkham-horror-lcg",
+                    "eldritch-horror"
+                  ]
+                },
+                {
+                  "row": 3,
+                  "col": 5,
+                  "kind": "open",
+                  "layout": "standing",
+                  "games": [
+                    "galaxy-trucker",
+                    "takenoko"
+                  ]
+                }
+              ],
+              "top": {
+                "layout": "standing",
+                "games": [
+                  "wavelength"
+                ]
+              }
+            },
+            {
+              "id": "right-top",
+              "name": "Right top 2×4",
+              "align": "right",
+              "rows": 2,
+              "cols": 4,
+              "cells": [
+                {
+                  "row": 1,
+                  "col": 4,
+                  "kind": "open",
+                  "layout": "stacked",
+                  "games": [
+                    "nemesis"
+                  ]
+                }
+              ],
+              "top": {
+                "layout": "standing",
+                "games": [
+                  "cthulhu-death-may-die",
+                  "zombicide"
+                ]
+              }
+            }
           ]
         }
       ]
     },
     {
-      "id": "hallway",
-      "name": "Hallway bookcase",
+      "id": "living-room",
+      "name": "Living room bookcase",
       "type": "shelf",
       "width": 3,
       "shelves": [
         {
           "layout": "standing",
           "games": [
-            "arkham-horror-lcg",
             "mansions-of-madness",
-            "eldritch-horror",
-            "nemesis"
+            "isle-of-cats",
+            "tokaido",
+            "photosynthesis"
           ]
         },
         {
@@ -198,12 +360,10 @@
         {
           "layout": "standing",
           "games": [
+            "santorini",
             "galaxy-trucker",
-            "isle-of-cats",
-            "takenoko",
-            "tokaido",
-            "photosynthesis",
-            "santorini"
+            "the-crew",
+            "love-letter"
           ]
         }
       ]
@@ -437,6 +597,74 @@
     },
     "santorini": {
       "name": "Santorini"
+    },
+    "everdell": {
+      "name": "Everdell"
+    },
+    "viticulture": {
+      "name": "Viticulture"
+    },
+    "agricola": {
+      "name": "Agricola"
+    },
+    "castles-of-burgundy": {
+      "name": "The Castles of Burgundy"
+    },
+    "heat": {
+      "name": "Heat: Pedal to the Metal"
+    },
+    "clank": {
+      "name": "Clank!"
+    },
+    "the-crew": {
+      "name": "The Crew",
+      "size": "small"
+    },
+    "just-one": {
+      "name": "Just One",
+      "size": "small"
+    },
+    "dominion": {
+      "name": "Dominion"
+    },
+    "small-world": {
+      "name": "Small World"
+    },
+    "calico": {
+      "name": "Calico"
+    },
+    "earth": {
+      "name": "Earth"
+    },
+    "cosmic-encounter": {
+      "name": "Cosmic Encounter"
+    },
+    "blood-on-the-clocktower": {
+      "name": "Blood on the Clocktower",
+      "size": "large"
+    },
+    "wavelength": {
+      "name": "Wavelength"
+    },
+    "kemet": {
+      "name": "Kemet: Blood and Sand",
+      "size": "large"
+    },
+    "blood-rage": {
+      "name": "Blood Rage",
+      "size": "large"
+    },
+    "rising-sun": {
+      "name": "Rising Sun",
+      "size": "large"
+    },
+    "cthulhu-death-may-die": {
+      "name": "Cthulhu: Death May Die",
+      "size": "large"
+    },
+    "zombicide": {
+      "name": "Zombicide",
+      "size": "large"
     }
   }
 }
