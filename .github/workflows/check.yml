@@ -1,0 +1,22 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  admin:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync
+      - run: uv run pytest
+      - run: uv run shelf-admin validate
+      - name: site/collection.json is up to date
+        run: |
+          uv run shelf-admin build --out /tmp/collection.json
+          diff -u ../site/collection.json /tmp/collection.json

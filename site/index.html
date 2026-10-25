@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelf Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div>
+      <div class="eyebrow">My board game collection</div>
+      <h1>Shelf Finder</h1>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="search">
+      <label for="q" class="eyebrow">Find a game</label>
+      <div class="search-row">
+        <input id="q" type="search" autocomplete="off" placeholder="e.g. Wingspan, Codenames…">
+        <button type="button" id="clear">Clear</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <div class="storages" id="storages"></div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </main>
+
+  <footer class="foot">
+    Game data from <a href="https://boardgamegeek.com" target="_blank" rel="noopener">BoardGameGeek</a> · Powered by BGG
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

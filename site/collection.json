@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "storages": [
+    {
+      "id": "living-kallax",
+      "name": "Living room Kallax",
+      "type": "kallax",
+      "rows": 4,
+      "cols": 4,
+      "cells": [
+        {
+          "row": 1,
+          "col": 1,
+          "kind": "open",
+          "layout": "standing",
+          "games": [
+            "wingspan",
+            "cascadia",
+            "azul"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "kind": "open",
+          "layout": "stacked",
+          "games": [
+            "gloomhaven",
+            "spirit-island",
+            "brass-birmingham"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "kind": "doors",
+          "layout": "standing",
+          "games": [
+            "catan",
+            "carcassonne",
+            "ticket-to-ride"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "kind": "open",
+          "layout": "standing",
+          "games": [
+            "terraforming-mars",
+            "ark-nova",
+            "root"
+          ]
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "kind": "drawers",
+          "drawers": [
+            [
+              "love-letter",
+              "the-mind",
+              "hanabi",
+              "skull"
+            ],
+            [
+              "sushi-go",
+              "coup",
+              "codenames-duet"
+            ]
+          ]
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "kind": "open",
+          "layout": "standing",
+          "games": [
+            "dune-imperium",
+            "lost-ruins-of-arnak",
+            "cartographers"
+          ]
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "kind": "open",
+          "layout": "stacked",
+          "games": [
+            "scythe",
+            "twilight-imperium"
+          ]
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "kind": "doors",
+          "layout": "standing",
+          "games": [
+            "dixit",
+            "mysterium",
+            "codenames"
+          ]
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "kind": "open",
+          "layout": "standing",
+          "games": [
+            "concordia",
+            "great-western-trail",
+            "orleans"
+          ]
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "kind": "drawers",
+          "drawers": [
+            [
+              "jaipur",
+              "lost-cities"
+            ],
+            [
+              "hive-pocket",
+              "patchwork"
+            ]
+          ]
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "kind": "open",
+          "layout": "standing",
+          "games": [
+            "pandemic",
+            "flash-point",
+            "sky-team"
+          ]
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "kind": "open",
+          "layout": "stacked",
+          "games": [
+            "twilight-struggle",
+            "war-of-the-ring"
+          ]
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "kind": "open",
+          "layout": "standing",
+          "games": [
+            "kingdomino",
+            "splendor",
+            "7-wonders-duel",
+            "quacks"
+          ]
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "kind": "doors",
+          "layout": "standing",
+          "games": [
+            "exploding-kittens",
+            "bang"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hallway",
+      "name": "Hallway bookcase",
+      "type": "shelf",
+      "width": 3,
+      "shelves": [
+        {
+          "layout": "standing",
+          "games": [
+            "arkham-horror-lcg",
+            "mansions-of-madness",
+            "eldritch-horror",
+            "nemesis"
+          ]
+        },
+        {
+          "layout": "stacked",
+          "games": [
+            "frosthaven",
+            "oathsworn"
+          ]
+        },
+        {
+          "layout": "standing",
+          "games": [
+            "galaxy-trucker",
+            "isle-of-cats",
+            "takenoko",
+            "tokaido",
+            "photosynthesis",
+            "santorini"
+          ]
+        }
+      ]
+    }
+  ],
+  "games": {
+    "wingspan": {
+      "name": "Wingspan",
+      "bgg": 266192,
+      "expansions": {
+        "owned": [
+          "European Expansion",
+          "Oceania Expansion"
+        ],
+        "notOwned": []
+      }
+    },
+    "cascadia": {
+      "name": "Cascadia"
+    },
+    "azul": {
+      "name": "Azul",
+      "bgg": 230802,
+      "size": "small"
+    },
+    "gloomhaven": {
+      "name": "Gloomhaven",
+      "bgg": 174430,
+      "size": "large"
+    },
+    "spirit-island": {
+      "name": "Spirit Island"
+    },
+    "brass-birmingham": {
+      "name": "Brass: Birmingham"
+    },
+    "catan": {
+      "name": "Catan",
+      "bgg": 13
+    },
+    "carcassonne": {
+      "name": "Carcassonne",
+      "bgg": 822
+    },
+    "ticket-to-ride": {
+      "name": "Ticket to Ride",
+      "bgg": 9209
+    },
+    "terraforming-mars": {
+      "name": "Terraforming Mars",
+      "bgg": 167791,
+      "expansions": {
+        "owned": [
+          "Prelude",
+          "Venus Next"
+        ],
+        "notOwned": []
+      }
+    },
+    "ark-nova": {
+      "name": "Ark Nova"
+    },
+    "root": {
+      "name": "Root"
+    },
+    "love-letter": {
+      "name": "Love Letter",
+      "size": "small"
+    },
+    "the-mind": {
+      "name": "The Mind",
+      "size": "small"
+    },
+    "hanabi": {
+      "name": "Hanabi",
+      "size": "small"
+    },
+    "skull": {
+      "name": "Skull",
+      "size": "small"
+    },
+    "sushi-go": {
+      "name": "Sushi Go!",
+      "size": "small"
+    },
+    "coup": {
+      "name": "Coup",
+      "size": "small"
+    },
+    "codenames-duet": {
+      "name": "Codenames Duet",
+      "size": "small"
+    },
+    "dune-imperium": {
+      "name": "Dune: Imperium",
+      "expansions": {
+        "owned": [
+          "Rise of Ix"
+        ],
+        "notOwned": []
+      }
+    },
+    "lost-ruins-of-arnak": {
+      "name": "Lost Ruins of Arnak"
+    },
+    "cartographers": {
+      "name": "Cartographers",
+      "size": "small"
+    },
+    "scythe": {
+      "name": "Scythe",
+      "size": "large"
+    },
+    "twilight-imperium": {
+      "name": "Twilight Imperium",
+      "size": "large"
+    },
+    "dixit": {
+      "name": "Dixit"
+    },
+    "mysterium": {
+      "name": "Mysterium"
+    },
+    "codenames": {
+      "name": "Codenames",
+      "bgg": 178900,
+      "size": "small"
+    },
+    "concordia": {
+      "name": "Concordia"
+    },
+    "great-western-trail": {
+      "name": "Great Western Trail"
+    },
+    "orleans": {
+      "name": "Orléans"
+    },
+    "jaipur": {
+      "name": "Jaipur",
+      "size": "small"
+    },
+    "lost-cities": {
+      "name": "Lost Cities",
+      "size": "small"
+    },
+    "hive-pocket": {
+      "name": "Hive Pocket",
+      "size": "small"
+    },
+    "patchwork": {
+      "name": "Patchwork",
+      "size": "small"
+    },
+    "pandemic": {
+      "name": "Pandemic",
+      "bgg": 30549
+    },
+    "flash-point": {
+      "name": "Flash Point"
+    },
+    "sky-team": {
+      "name": "Sky Team",
+      "size": "small"
+    },
+    "twilight-struggle": {
+      "name": "Twilight Struggle"
+    },
+    "war-of-the-ring": {
+      "name": "War of the Ring",
+      "size": "large"
+    },
+    "kingdomino": {
+      "name": "Kingdomino",
+      "size": "small"
+    },
+    "splendor": {
+      "name": "Splendor",
+      "size": "small"
+    },
+    "7-wonders-duel": {
+      "name": "7 Wonders Duel",
+      "size": "small"
+    },
+    "quacks": {
+      "name": "Quacks"
+    },
+    "exploding-kittens": {
+      "name": "Exploding Kittens",
+      "size": "small"
+    },
+    "bang": {
+      "name": "Bang!",
+      "size": "small"
+    },
+    "arkham-horror-lcg": {
+      "name": "Arkham Horror LCG"
+    },
+    "mansions-of-madness": {
+      "name": "Mansions of Madness",
+      "size": "large"
+    },
+    "eldritch-horror": {
+      "name": "Eldritch Horror"
+    },
+    "nemesis": {
+      "name": "Nemesis",
+      "size": "large"
+    },
+    "frosthaven": {
+      "name": "Frosthaven",
+      "size": "large"
+    },
+    "oathsworn": {
+      "name": "Oathsworn",
+      "size": "large"
+    },
+    "galaxy-trucker": {
+      "name": "Galaxy Trucker"
+    },
+    "isle-of-cats": {
+      "name": "Isle of Cats"
+    },
+    "takenoko": {
+      "name": "Takenoko"
+    },
+    "tokaido": {
+      "name": "Tokaido"
+    },
+    "photosynthesis": {
+      "name": "Photosynthesis"
+    },
+    "santorini": {
+      "name": "Santorini"
+    }
+  }
+}
