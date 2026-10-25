@@ -108,7 +108,9 @@ function wallHtml(s, ctx) {
     return `<div class="stack">${units.reverse().join('')}</div>`;
   }).join('');
   const count = s.stacks.reduce((n, st) => n + st.units.length, 0);
-  return `<section class="storage storage--wall">
+  const cols = s.stacks.reduce((n, st) => n + Math.max(...st.units.map(u => u.cols)), 0);
+  const extra = (cols + s.stacks.length) * 8 + 3 * (s.stacks.length - 1) + 8;
+  return `<section class="storage storage--wall" style="--wc:${cols};--wx:${extra}px">
     <div class="storage-head"><h2>${esc(s.name)}</h2><span class="meta">Wall · ${count} Kallax units</span></div>
     <div class="scroll"><div class="wall">${stacks}</div></div></section>`;
 }
@@ -164,17 +166,39 @@ function render() {
   }
   $('#storages').innerHTML = data.storages.map(s => s.type === 'kallax' ? kallaxHtml(s, ctx) : s.type === 'wall' ? wallHtml(s, ctx) : shelfHtml(s, ctx)).join('');
   $('#panel').innerHTML = panelHtml(ctx);
+  const peek = $('#peek');
+  peek.hidden = !q;
+  if (q) {
+    const top = found[0];
+    const more = top ? new Set(found.map(p => p.id)).size - 1 : 0;
+    peek.innerHTML = top ? `${PIN}<span><strong>${esc(game(top.id).name)}</strong> · ${esc(top.where)}${more ? ` <em>+${more} more</em>` : ''}</span>` : '<span>No match</span>';
+  }
 }
 
-function setQuery(v) {
+let revealTimer;
+function revealHit(force = false) {
+  clearTimeout(revealTimer);
+  revealTimer = setTimeout(() => {
+    const el = document.querySelector('.box.is-hit, .drawer.is-hit');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const barBottom = Math.max(0, $('.search').getBoundingClientRect().bottom);
+    const visible = r.top >= barBottom && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth;
+    if (force || !visible) el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+  }, force ? 0 : 400);
+}
+
+function setQuery(v, reveal = false) {
   state.query = v;
   $('#q').value = v;
   history.replaceState(null, '', v ? `#q=${encodeURIComponent(v)}` : location.pathname + location.search);
   render();
+  if (reveal && state.query.trim()) revealHit();
 }
 
 function bind() {
-  $('#q').addEventListener('input', e => setQuery(e.target.value));
+  $('#q').addEventListener('input', e => setQuery(e.target.value, true));
+  $('#peek').addEventListener('click', () => revealHit(true));
   $('#q').addEventListener('keydown', e => { if (e.key === 'Escape') setQuery(''); });
   $('#clear').addEventListener('click', () => { setQuery(''); $('#q').focus(); });
   document.addEventListener('keydown', e => {
@@ -203,7 +227,7 @@ async function init() {
   const unique = new Set(places.map(p => p.id)).size;
   $('#stats').textContent = `${unique} games · ${data.storages.length} storages`;
   const m = location.hash.match(/^#q=(.*)$/);
-  setQuery(m ? decodeURIComponent(m[1]) : '');
+  setQuery(m ? decodeURIComponent(m[1]) : '', true);
   bind();
 }
 
