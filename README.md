@@ -29,10 +29,10 @@ cd admin
 uv run pytest
 ```
 
-## Deploy (Cloudflare Pages)
-Connect the GitHub repo in Cloudflare Pages:
-- Build command: *(empty)*
-- Build output directory: `site`
+## Deploy (Cloudflare Workers)
+Connect the GitHub repo in Cloudflare Workers & Pages:
+- Build command: *(empty)*, deploy command: `npx wrangler deploy`
+- `wrangler.jsonc` serves only `site/`; the Cloudflare project name must match its `name`
 
 Every push to `main` redeploys.
 
