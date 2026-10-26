@@ -4,10 +4,11 @@ import http.server
 import json
 import os
 import sys
+import webbrowser
 from pathlib import Path
 
 from shelf_admin.bgg import BGG, BGGError, resolve
-from shelf_admin.model import build, load_bgg, load_yaml, split_expansions, validate
+from shelf_admin.model import load_bgg, load_yaml, split_expansions, validate, write_site
 
 ADMIN = Path(__file__).resolve().parents[2]
 ROOT = ADMIN.parent
@@ -45,8 +46,7 @@ def cmd_build(args):
     data = load_yaml(args.data)
     if not check(data):
         return 1
-    out = build(data, load_bgg(BGG_DATA))
-    args.out.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out = write_site(data, BGG_DATA, args.out)
     print(f"wrote {args.out} ({len(out['games'])} games, {len(out['storages'])} storages)")
     return 0
 
@@ -104,6 +104,21 @@ def cmd_serve(args):
     http.server.ThreadingHTTPServer(("127.0.0.1", args.port), handler).serve_forever()
 
 
+def cmd_admin(args):
+    from shelf_admin.server import make_server
+
+    server = make_server(args.port, args.data, BGG_DATA, SITE)
+    url = f"http://localhost:{server.server_address[1]}/"
+    print(f"admin: {url}  (Ctrl+C to stop)")
+    if not args.no_browser:
+        webbrowser.open(url)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    return 0
+
+
 def main():
     p = argparse.ArgumentParser(prog="shelf-admin")
     p.add_argument("--data", type=Path, default=DATA)
@@ -121,5 +136,9 @@ def main():
     s = sub.add_parser("serve", help="preview the site locally")
     s.add_argument("--port", type=int, default=8000)
     s.set_defaults(fn=cmd_serve)
+    a = sub.add_parser("admin", help="edit storages and game placement in the browser")
+    a.add_argument("--port", type=int, default=8001)
+    a.add_argument("--no-browser", action="store_true")
+    a.set_defaults(fn=cmd_admin)
     args = p.parse_args()
     sys.exit(args.fn(args) or 0)

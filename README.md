@@ -15,6 +15,7 @@ cp .env.example .env   # add BGG_API_TOKEN
 ## Update the collection
 ```bash
 cd admin
+uv run shelf-admin admin        # edit storages + game placement in the browser, saves YAML and rebuilds
 uv run shelf-admin validate
 uv run shelf-admin bgg          # match games on BGG, fetch expansions (needs token)
 uv run shelf-admin expansions   # owned / missing expansions per game
@@ -37,6 +38,7 @@ Connect the GitHub repo in Cloudflare Workers & Pages:
 Every push to `main` redeploys.
 
 ## Notes
+- `shelf-admin admin` runs on http://localhost:8001 only. Drag boxes between cubes, click a cube or storage name to edit; Save writes `collection.yaml` (comments kept) and `site/collection.json`.
 - BGG API rules: see `BGG_RULES.md`. The official "Powered by BGG" logo must be at `site/img/powered-by-bgg.webp` (CI fails without it).
 - BGG API needs a registered app token: https://boardgamegeek.com/applications. Never commit `.env`.
 - Pin a wrong BGG match with `bgg: <id>` on the game in `collection.yaml`, then rerun `bgg`.

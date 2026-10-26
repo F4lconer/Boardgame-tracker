@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelf Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/site/style.css">
+<link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+<div class="page">
+  <header class="top admin-top">
+    <div>
+      <div class="eyebrow">Shelf Finder · local admin</div>
+      <h1>Shelf Admin</h1>
+      <div class="stats" id="status"></div>
+    </div>
+    <div class="actions">
+      <button type="button" id="undo" title="Ctrl+Z">Undo</button>
+      <button type="button" id="revert">Revert</button>
+      <a href="/site/index.html" target="_blank" rel="noopener">Open viewer ↗</a>
+      <button type="button" id="save" class="primary" title="Ctrl+S">Save</button>
+    </div>
+  </header>
+  <div class="notice" id="notice" hidden></div>
+  <main class="layout">
+    <div class="storages" id="storages"></div>
+    <aside class="panel">
+      <div class="panel-main" id="panel"></div>
+      <div id="tray"></div>
+      <div id="issues"></div>
+    </aside>
+  </main>
+</div>
+<datalist id="game-names"></datalist>
+<script src="/admin.js"></script>
+</body>
+</html>

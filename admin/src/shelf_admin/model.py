@@ -188,3 +188,9 @@ def build(data: dict, bgg: dict) -> dict:
         games[gid] = game
 
     return {"version": 1, "storages": storages, "games": games}
+
+
+def write_site(data: dict, bgg_path: Path, out: Path) -> dict:
+    result = build(data, load_bgg(bgg_path))
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return result
